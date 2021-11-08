@@ -1,0 +1,59 @@
+{% extends 'CS3620_BookApp/Base.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+</head>
+<body>
+
+{% block body %}
+
+
+<table border = "1">
+        <tr border = "1">
+            <th>Name</th>
+            <th>Category</th>
+            <th>ISBN</th>
+            <th>Description</th>
+            <th>Rating</th>
+            <th>Image</th>
+    </tr>
+{% for book_item in book_object %}
+
+    <tr>
+        <td>{{book_item.Book_Name}}</td>
+        <td>{{book_item.Book_Category}}</td>
+        <td>{{book_item.Book_ISBN}}</td>
+        <td>{{book_item.Book_Description}}</td>
+        <td>{{book_item.Book_Rating}}</td>
+        <td>{{book_item.Book_Image}}</td>
+    </tr>
+{% endfor %}
+
+</tr>
+</table>
+<table>
+    <form action="" method="GET">
+    <input type="search" name="Book_Category">
+    <button type="submit">Search</button>
+</form>
+<tr>
+{% if book_object.has_previous %}
+<a href="?page=1">First</a>
+<a href="?page={{ book_object.previous_page_number}}">Previous</a>
+{% endif %}
+
+Page: {{ book_object.number }} of {{ book_object.paginator.num_pages }}
+
+{% if book_object.has_next %}
+    <a href="?page={{ book_object.next_page_number}}">Next</a>
+    <a href="?page={{ book_object.paginator.num_pages}}">Last</a>
+{% endif %}
+
+</table>
+
+{% endblock %}
+
+</body>
+</html>
